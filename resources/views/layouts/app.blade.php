@@ -34,7 +34,7 @@
 
         <div class="container">
             <a class="navbar-brand" href="#top" title="Página Inicial">
-                <img src="assets/img/vem__trocar-logo.png" alt="Logo VemTrocar">
+                <img src= "{{ asset('img/vem__trocar-logo.png') }}" alt="Logo VemTrocar" > 
             </a>
         
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -53,22 +53,22 @@
                         <a class="nav-link" href="#" title="Minha Conta"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Minha Conta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao" title="login">Login</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao__cadastro" title="cadastre-se">Cadastre-se</a>
                     </li>
-                    
                     <li class="nav-item">
-                        <a class="nav-link link__modal" title="detalhe" href="detalheproduto.php">Detalhe</a>
+                        <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao" title="login">Login</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link link__modal" title="Sobre" href="sobre.php">Sobre</a>
+                        <a class="nav-link link__modal" title="detalhe" href="/detalhe">Detalhe</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link link__modal" title="Lista" href="listaprodutos.php">Lista</a>
+                        <a class="nav-link link__modal" title="Sobre" href="/sobre">Sobre</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link link__modal" title="Lista" href="/lista">Lista</a>
                     </li>
 
 
@@ -390,6 +390,189 @@
             </div>
     
         </footer>
+
+        <!-- Modal Registro -->
+		<div class="modal fade" id="modalPadrao" tabindex="-1" role="dialog" aria-labelledby="modalPadrao" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h5 class="modal-title" id="modalPadrao">Vem trocar! Bora lá?</h5>
+					
+					<form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+					
+
+					{{-- <button type="button" class="modal--btn cadastro__facebook"> Entrar com o Facebook </button>
+
+					<button type="button" class="modal--btn cadastro__email">  Entrar com email </button>
+
+					<span class="separador"> ou </span>
+
+					<button type="button" class="modal--btn cadastro__criarContaEmail">  Criar conta com email </button> --}}
+
+				</div>
+				<div class="modal-footer"></div>
+				</div>
+			</div>
+        </div>
+
+        <!-- Modal Cadastro Final -->
+        
+
+        <!-- Modal Login -->
+
+		<div class="modal fade" id="modalPadrao__cadastro" tabindex="-1" role="dialog" aria-labelledby="modalPadrao__cadastro" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="modal-title">Crie sua conta e VEM TROCAR!</h5>
+
+						<div class="row">
+                                <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+                
+                                        <div class="form-group row">
+                                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                
+                                            <div class="col-md-6">
+                                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group row">
+                                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                
+                                            <div class="col-md-6">
+                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group row">
+                                            <div class="col-md-6 offset-md-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                
+                                                    <label class="form-check-label" for="remember">
+                                                        {{ __('Remember Me') }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group row mb-0">
+                                            <div class="col-md-8 offset-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Login') }}
+                                                </button>
+                
+                                                @if (Route::has('password.request'))
+                                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                        {{ __('Forgot Your Password?') }}
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </form>
+							
+						</div>
+
+						<button type="button" class="modal--btn cadastro__email"> Criar conta </button>
+						<span class="separador"> ou </span>
+						<button type="button" class="modal--btn cadastro__facebook"> Cadastre-se com o Facebook </button>
+
+					</div>
+					<div class="modal-footer">
+						<span>Ao clicar em criar conta, você está de acordo com os <a class="rosa" href="#">termos de serviço</a></span>
+					</div>
+
+				</div>
+			</div>
+		</div>
+        
+
+        <!-- Modal Login Final -->
 
     </div>
 
