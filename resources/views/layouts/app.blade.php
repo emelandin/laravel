@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'VemTrocar') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -46,33 +46,33 @@
 
                 <ul class="navbar-nav ml-auto">
 
-                    <li class="nav-item active">
+                    {{-- <li class="nav-item active">
                         <a class="nav-link" href="#" title="Chat">Chat</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" title="Minha Conta"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Minha Conta</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao__cadastro" title="cadastre-se"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao__cadastro" title="cadastre-se">Cadastre-se</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao" title="login">Login</a>
+                        <a class="nav-link link__modal" data-toggle="modal" data-target="#modalPadrao" title="login">Cadastre-se</a>
                     </li>
                     
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link link__modal" title="detalhe" href="/detalhe">Detalhe</a>
-                    </li>
+                    </li> --}}
                     
                     <li class="nav-item">
                         <a class="nav-link link__modal" title="Sobre" href="/sobre">Sobre</a>
                     </li>
                     
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link link__modal" title="Lista" href="/lista">Lista</a>
-                    </li>
+                    </li> --}}
 
 
-                    <button type="button" class="btn bg-rosa">Anunciar</button>
+                    {{-- <button type="button" class="btn bg-rosa">Anunciar</button> --}}
                 </ul>
 
             </div>
@@ -233,11 +233,11 @@
 </header>
 
 <body>
-    <div id="app">
+    {{-- <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'VemTrocar') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -283,7 +283,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <main class="py-4">
             @yield('content')
@@ -495,7 +495,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<h5 class="modal-title">Crie sua conta e VEM TROCAR!</h5>
+						<h5 class="modal-title">Faça seu login e comece a trocar !</h5>
 
 						<div class="row">
                                 <form method="POST" action="{{ route('login') }}">
@@ -558,14 +558,6 @@
 							
 						</div>
 
-						<button type="button" class="modal--btn cadastro__email"> Criar conta </button>
-						<span class="separador"> ou </span>
-						<button type="button" class="modal--btn cadastro__facebook"> Cadastre-se com o Facebook </button>
-
-					</div>
-					<div class="modal-footer">
-						<span>Ao clicar em criar conta, você está de acordo com os <a class="rosa" href="#">termos de serviço</a></span>
-					</div>
 
 				</div>
 			</div>
