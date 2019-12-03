@@ -102,7 +102,7 @@
     </section>   
 
 <!-- Lista de Produtos -->
-@extends('product.show')
+@extends('logado')
 
 @section('content')
 

@@ -14,22 +14,21 @@ class ProdutoController extends Controller
         $user_id = Auth::user()->id;
         $produtos = Produto::where('user_id', '=', $user_id)->paginate(5);
 
-        return view('product.index')->with('products', $produtos);
+        return view('product\index')->with('product', $produtos);
     }
 
     public function show($id){
         $produto = Produto::find($id);
 
-        return view('product.show')->with('product', $produto);
+        return view('product\show')->with('product', $produto);
     }
 
     public function create(){
-        return view('create');
+        return view('product\create');
     }
 
-    public function store(ProdutoRequest $request){
+    public function store(Request $request){
         $request->all();
-
         $arquivo = $request->file('imagem_produto');
 
         if (empty($arquivo)) {
@@ -43,20 +42,20 @@ class ProdutoController extends Controller
         }
 
         $produto = Produto::create([
-            'nome_produto' => $request->input('nome'),
-            'descricao_produto' => $request->input('descricao'),
-            'tipo_produto' => $request->input('tipo'),
-            'imagem_produto' => $caminhoRelativo,
-            'user_id' => Auth::user()->id
+            'nome_produto' => $request->input('nome_produto'),
+            'descricao_produto' => $request->input('descricao_produto'),
+            'tipo_produto' => $request->input('tipo_produto'),
+            'imagem_produto' => $caminhoRelativo
+             'user_id' => $user_id
         ]);
 
-        return redirect('/products');
+        return view('home');
     }
 
     public function edit($id){
         $produto = Produto::find($id);
 
-        return view('product.edit')->with('product', $produto);
+        return view('product\edit')->with('product', $produto);
     }
 
     public function update(ProdutoRequest $request, $id){
@@ -83,7 +82,7 @@ class ProdutoController extends Controller
 
         $produto->save();
 
-        return redirect('/products/show/'.$produto->id);
+        return redirect('/product/show/'.$produto->id);
     }
 
     public function destroy($id){
@@ -91,7 +90,7 @@ class ProdutoController extends Controller
 
         $produto->delete();
 
-        return redirect('/products');
+        return redirect('/product');
     }
 
     public function search(Request $request){
@@ -102,6 +101,6 @@ class ProdutoController extends Controller
               ->orWhere('descricao_produto', 'like', '%'.$search.'%')
               ->paginate(5);
 
-        return view('product.index')->with(['products' => $produtos, 'search' => $search]);
+        return view('product.index')->with(['product' => $produtos, 'search' => $search]);
     }
 }

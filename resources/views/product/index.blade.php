@@ -5,28 +5,28 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="message alert-success d-none p-2 my-4">
-                    Contato excluído com sucesso
+                    Produto excluído com sucesso
                 </div>
                 <div class="mb-4">
-                    <a href="/contacts/create">
-                        <button class="btn btn-primary">Novo Contato</button>
+                    <a href="/product/create">
+                        <button class="btn btn-primary">Novo Produto</button>
                     </a>
                 </div>
                 <div class="mb-4">
-                    <form class="form-inline" action="{{ url('/contacts/filter-contacts') }}" method="GET">
+                    <form class="form-inline" action="{{ url('/product/filter-product') }}" method="GET">
                         <input class="form-control col-10" type="text" name="search" id="search" placeholder="O que você procura?">
                         <button class="btn btn-outline-primary col-2" type="submit">Pesquisar</button>
                     </form>
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        Contatos
+                        Produtos
                     </div>
                     <div class="card-body">
                         @if($produtos->isEmpty())
                             <section class="row">
                                 <div class="col-12">
-                                    <h1 class="col-12 text-center">Que pena! Não encontramos contatos na sua agenda.</h1>
+                                    <h1 class="col-12 text-center">Que pena! Não encontramos .</h1>
                                 </div>
                             </section>
                         @else
@@ -39,14 +39,14 @@
                                                 <td>{{ $produto->nome_produto }}</a></td>
                                                 <td>{{ $produto->descricao_produto }}</a></td>
                                                 <td class="d-none d-md-table-cell">{{ $produto->tipo_produto }}</a></td>
-                                                <td class="d-none d-md-table-cell">{{ $produto->email }}</a></td>
+                                                {{-- <td class="d-none d-md-table-cell">{{ $produto->email }}</a></td> --}}
                                                 <td>
-                                                    <a href="/contacts/show/{{$produto->id}}">
+                                                    <a href="/product/show/{{$produto->id}}">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="/contacts/edit/{{$produto->id}}">
+                                                    <a href="/product/edit/{{$produto->id}}">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </td>
@@ -58,20 +58,20 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">Deseja excluir o contato {{ $produto->titulo }} ?</h5>
+                                                                    <h5 class="modal-title">Deseja excluir o produto {{ $produto->titulo }} ?</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p>Contato: {{ $produto->nome_produto . " " . $produto->descricao_produto }}</p>
+                                                                    <p>Produto: {{ $produto->nome_produto . " " . $produto->descricao_produto }}</p>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                    <form action="/contacts/remove/{{ $produto->id }}" method="POST">
+                                                                    <form action="/product/remove/{{ $produto->id }}" method="POST">
                                                                         @csrf
                                                                         {{ method_field('DELETE') }}
-                                                                        <button id="delete-contact" type="submit" class="btn btn-danger">Excluir</a>
+                                                                        <button id="delete-product" type="submit" class="btn btn-danger">Excluir</a>
                                                                     </form>
                                                                 </div>
                                                             </div>
