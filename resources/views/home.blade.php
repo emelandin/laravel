@@ -100,3 +100,10 @@
                 <div class="col-12 px-0 px-md-4">
                     <ul class="busca_filtros__categorias-lista mb-0 list-inline category-stripe pb-3">
     </section>   
+
+<!-- Lista de Produtos -->
+@extends('product.show')
+
+@section('content')
+
+@endsection

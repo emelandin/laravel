@@ -29,4 +29,20 @@ Route::get('/detalhe', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function (){
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/produto', 'ProdutoController@index')->name('products-index');
+
+    Route::get('/produto/show/{id}', 'ProdutoController@show')->name('products-show');
+
+    Route::get('/produto/create', 'ProdutoController@create')->name('products-create');
+    Route::post('/produto/create', 'ProdutoController@store');
+
+    Route::get('/produto/edit/{id}', 'ProdutoController@edit')->name('products-edit');
+    Route::put('/produto/edit/{id}', 'ProdutoController@update');
+
+    Route::delete('/produto/remove/{id}', 'ProdutoController@destroy');
+
+    Route::get('/produto/filter-products', 'ProdutoController@search');
+});
