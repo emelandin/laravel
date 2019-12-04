@@ -19,7 +19,6 @@ class CreateProdutoTable extends Migration
             $table->string('descricao_produto', 50);
             $table->string('tipo_produto', 50);
             $table->string('imagem_produto', 200)->nullable();
-            $table->foreign('id')->references('id')->on('users'); 
             $table->timestamps();
         });
     }
