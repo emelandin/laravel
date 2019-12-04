@@ -9,24 +9,30 @@
                         Produtos
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('product/edit/'.$produto->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('produto/edit/'.$produto->id) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
-                            {{ method_field('PUT') }}
+                            {{ method_field('POST') }}
 
                             <div class="form-group">
-                                <img src="{{ $produto->imagem_produto }}" class="rounded-circle" width="230" height="230">
+                                <img src="{{url($produto->imagem_produto)}}" class="rounded-circle" width="230" height="230">
                             </div>
 
                             <div class="form-group">
                                 <label for="nome_produto">Nome</label>
-                                <input type="text" class="form-control{{$errors->has('nome_produto') ? ' is-invalid':''}}" value="{{ $produto->nome_produto }}" id="nome" name="nome">
+                                <input type="text" class="form-control{{$errors->has('nome_produto') ? ' is-invalid':''}}" value="{{ $produto->nome_produto }}" id="nome_produto" name="nome_produto">
                                 <div class="invalid-feedback">{{ $errors->first('nome_produto') }}</div>
                             </div>
 
                             <div class="form-group">
+                                <label for="tipo_produto">Tipo</label>
+                                <input type="text" class="form-control{{$errors->has('tipo_produto') ? ' is-invalid':''}}" value="{{ $produto->tipo_produto }}" id="tipo_produto" name="tipo_produto">
+                                <div class="invalid-feedback">{{ $errors->first('tipo_produto') }}</div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="descricao_produto">Descrição</label>
-                                <input type="text" class="form-control{{$errors->has('descricao_produto') ? ' is-invalid':''}}" value="{{ $produto->descricao_produto }}" id="sobrenome" name="sobrenome">
+                                <input type="text" class="form-control{{$errors->has('descricao_produto') ? ' is-invalid':''}}" value="{{ $produto->descricao_produto }}" id="descricao_produto" name="descricao_produto">
                                 <div class="invalid-feedback">{{ $errors->first('descricao_produto') }}</div>
                             </div>
 

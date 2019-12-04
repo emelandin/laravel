@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Produto;
 use App\User;
-use App\Http\Requests\ProdutoRequest;
+// use App\Http\Requests\Request;
 
 class ProdutoController extends Controller
 {
@@ -46,20 +46,18 @@ class ProdutoController extends Controller
             'descricao_produto' => $request->input('descricao_produto'),
             'tipo_produto' => $request->input('tipo_produto'),
             'imagem_produto' => $caminhoRelativo
-             'user_id' => $user_id
+             //'user_id' => $user_id
         ]);
-
-        return view('home');
     }
 
     public function edit($id){
         $produto = Produto::find($id);
 
-        return view('product\edit')->with('product', $produto);
+        return view('product.edit')->with('produto', $produto);
     }
 
-    public function update(ProdutoRequest $request, $id){
-        $produto = Produto::find($id);
+    public function update(Request $request){
+        $produto = Produto::find($request->input('id'));
 
         $request->all();
 
@@ -75,9 +73,9 @@ class ProdutoController extends Controller
             $arquivo->move($caminhoAbsoluto, $nomeArquivo);
         }
 
-        $produto->nome_produto = $request->input('nome');
-        $produto->descricao_produto = $request->input('descricao');
-        $produto->tipo_produto = $request->input('tipo');
+        $produto->nome_produto = $request->input('nome_produto');
+        $produto->descricao_produto = $request->input('descricao_produto');
+        $produto->tipo_produto = $request->input('tipo_produto');
         $produto->imagem_produto = $caminhoRelativo;
 
         $produto->save();
@@ -101,6 +99,6 @@ class ProdutoController extends Controller
               ->orWhere('descricao_produto', 'like', '%'.$search.'%')
               ->paginate(5);
 
-        return view('product.index')->with(['product' => $produtos, 'search' => $search]);
+        return view('product.index')->with(['produto' => $produtos, 'search' => $search]);
     }
 }
